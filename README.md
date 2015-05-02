@@ -24,14 +24,14 @@ In the database.yml file the password is set to and environemnt variable: BLOG_A
 
 * DB role 'api'
 
-Setup a Postgress db for api_blog_api and a role: 'api'
+Setup a Postgress role: 'api'
 
 * http://postgresapp.com
 * https://eggerapps.at/pgcommander/
 
     CREATE ROLE api WITH SUPERUSER LOGIN PASSWORD 'XXXX';
-    CREATE DATABASE api_development OWNER api;
-    CREATE DATABASE api_test OWNER api;
+    CREATE DATABASE blog_api_development OWNER api;
+    CREATE DATABASE blog_api_test OWNER api;
 
 * `bundle exec rake db:setup`
 * See the seeds file to create resources for a post, author, and user
