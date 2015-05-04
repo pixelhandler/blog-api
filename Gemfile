@@ -32,10 +32,16 @@ end
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano', :group => :development
+group :development do
+  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-passenger'
+end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
