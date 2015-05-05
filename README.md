@@ -14,24 +14,30 @@ JSON API following [jsonapi.org] spec for a blog application with auth for creat
 
 * Database creation, I used the [Postgres app] and had to configure bundle:
 
-	bundle config build.pg --with-pg-config=/Applications/Postgres.app/Contents/Versions/9.4/bin/pg_config
+    bundle config build.pg --with-pg-config=/Applications/Postgres.app/Contents/Versions/9.4/bin/pg_config
 
 ### Config
 
-In the database.yml file the password is set to and environemnt variable: BLOG_API_DB_PWORD
+Copy the config/database.example.yml config/secrets.example.yml files to:
+config/database.yml config/secrets.yml 
 
-	export BLOG_API_DB_PWORD='XXXX'
+In the database.example.yml file the password is set to and environemnt variables:
+BLOG_API_DB_USR and BLOG_API_DB_PWORD. set your environment variables, or replace them
+with your db credentials
 
-* DB role 'api'
+    export BLOG_API_DB_USR='blog-api'
+    export BLOG_API_DB_PWORD='XXXX'
 
-Setup a Postgress role: 'api'
+* DB role 'blog-api'
+
+Setup a Postgress role: 'blog-api'
 
 * http://postgresapp.com
 * https://eggerapps.at/pgcommander/
 
     CREATE ROLE api WITH SUPERUSER LOGIN PASSWORD 'XXXX';
-    CREATE DATABASE blog_api_development OWNER api;
-    CREATE DATABASE blog_api_test OWNER api;
+    CREATE DATABASE blog_api_development OWNER blog-api;
+    CREATE DATABASE blog_api_test OWNER blog-api;
 
 * `bundle exec rake db:setup`
 * See the seeds file to create resources for a post, author, and user
