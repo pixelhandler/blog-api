@@ -42,6 +42,10 @@ Setup a Postgress role: 'blog-api'
 * `bundle exec rake db:setup`
 * See the seeds file to create resources for a post, author, and user
 
+### Seeds
+
+Copy the db/seeds.example.rb and add records for an user, author and posts
+
 
 ## Tests
 
