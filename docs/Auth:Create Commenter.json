@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK 
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+Etag: W/"eb64d693b8bd0a41fd3f9e3ee1d81eb6"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 4023d18d-b185-4320-aa00-868fb7e446fd
+X-Runtime: 0.882378
+Server: WEBrick/1.3.1 (Ruby/2.2.2/2015-04-13)
+Date: Sun, 10 May 2015 06:32:06 GMT
+Content-Length: 145
+Connection: close
+
+{"auth_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21tZW50ZXJfaWQiOjIsImV4cCI6MTQzMTMyNTkyNn0.3xTOUm-lTeZUnKFW4kfpGi8tD9lt_KPkfNCFrWjOh2U"}

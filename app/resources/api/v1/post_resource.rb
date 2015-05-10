@@ -3,6 +3,7 @@ require 'jsonapi/resource'
 class Api::V1::PostResource < JSONAPI::Resource
   attributes :id, :title, :slug, :excerpt, :date, :body
   has_one :author
+  has_many :comments
 
   paginator :offset
 
