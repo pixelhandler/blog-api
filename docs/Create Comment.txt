@@ -1,0 +1,23 @@
+POST /api/v1/comments HTTP/1.1
+Accept: application/vnd.api+json
+Content-Type: application/vnd.api+json
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb21tZW50ZXJfaWQiOjIsImV4cCI6MTQzMTMyNTkyNn0.3xTOUm-lTeZUnKFW4kfpGi8tD9lt_KPkfNCFrWjOh2U
+Host: localhost:3000
+Connection: close
+User-Agent: Paw/2.2.1 (Macintosh; OS X/10.10.3) GCDHTTPRequest
+Content-Length: 260
+
+{
+  "data": {
+    "type": "comments",
+    "body": "I really like this post too",
+	"links": {
+      "commenter": {
+        "linkage": { "type": "commenters", "id": "1" }
+      },
+	  "post": {
+        "linkage": { "type": "posts", "id": "2" }
+      }
+    }
+  }
+}

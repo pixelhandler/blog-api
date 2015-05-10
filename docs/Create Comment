@@ -1,0 +1,15 @@
+HTTP/1.1 201 Created 
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/vnd.api+json
+Etag: W/"bf7b32f1febb74cd506fbba627cecfa7"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: b994365f-6b08-4cb3-9738-4ecca7209791
+X-Runtime: 0.009592
+Server: WEBrick/1.3.1 (Ruby/2.2.2/2015-04-13)
+Date: Sun, 10 May 2015 06:57:46 GMT
+Content-Length: 477
+Connection: close
+
+{"data":{"id":"4","body":"I really like this post too","type":"comments","links":{"self":"http://localhost:3000/api/v1/comments/4","commenter":{"self":"http://localhost:3000/api/v1/comments/4/links/commenter","related":"http://localhost:3000/api/v1/comments/4/commenter","linkage":{"type":"commenters","id":"1"}},"post":{"self":"http://localhost:3000/api/v1/comments/4/links/post","related":"http://localhost:3000/api/v1/comments/4/post","linkage":{"type":"posts","id":"2"}}}}}

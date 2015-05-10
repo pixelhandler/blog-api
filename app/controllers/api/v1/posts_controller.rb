@@ -38,7 +38,7 @@ class Api::V1::PostsController < ApiControllerController
     end
 
     def _default_sort
-      [{:field=>"date", :direction=>:desc}, {:field=>"id", :direction=>:desc}]
+      [{:field=>"date", :direction=>:desc}]
     end
 
     def _add_meta_to(payload)
