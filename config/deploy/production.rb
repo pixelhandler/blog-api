@@ -1,18 +1,23 @@
 set :production, :prod
 
+set :rails_env, 'production'
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-set :user, ask('Server username', nil)
-set :password, ask('Server password', nil)
+set :user, 'deploy'
+# set :user, ask('Server username', nil)
+# set :password, ask('Server password', nil)
 
-server 'pixelhandler.com', user: fetch(:user), password: fetch(:password), roles: %w{app db web}
+server 'pixelhandler.com', user: fetch(:user), roles: %w{app db web}
+# server '104.236.185.21', user: fetch(:user), password: fetch(:password), roles: %w{app db web}
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-
+# Default value for default_env is {}
+set :default_env, { path: "/home/#{fetch(:user)}/.rbenv/shims:/home/#{fetch(:user)}/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:$PATH" }
 
 # role-based syntax
 # ==================
@@ -26,11 +31,6 @@ server 'pixelhandler.com', user: fetch(:user), password: fetch(:password), roles
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-#role :app, "#{fetch(:user)}@pixelhandler.com"
-#role :web, "#{fetch(:user)}@pixelhandler.com"
-#role :db, "#{fetch(:user)}@pixelhandler.com"
-
-
 # Configuration
 # =============
 # You can set any configuration variable like in config/deploy.rb
@@ -39,6 +39,7 @@ server 'pixelhandler.com', user: fetch(:user), password: fetch(:password), roles
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
+# Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/#{fetch(:user)}/www/blog-api"
 
 # Custom SSH Options

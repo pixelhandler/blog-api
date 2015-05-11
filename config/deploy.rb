@@ -22,7 +22,7 @@ ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :log_level, :debug
 
 # Default value for :pty is false
-set :pty, true
+# set :pty, false
 
 # Default value for :linked_files is []
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
@@ -30,25 +30,24 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
+def env_vars
+  ". /etc/default/nginx"
+end
 
 set :rbenv_type, :user # or :system, depends on your rbenv setup
 # set :rbenv_ruby, '2.2.2'
 # in case you want to set ruby version from the file:
 set :rbenv_ruby, File.read('.ruby-version').strip
 
-set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_prefix, "#{env_vars} && RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
-
-# Passenger
-set :passenger_restart_with_sudo, false # default
-set :passenger_restart_command, 'rbenv sudo passenger-config restart-app'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-set :keep_releases, 10
+set :keep_releases, 5
 
 namespace :deploy do
 
@@ -66,13 +65,18 @@ namespace :deploy do
     end
   end
 
-  after :restart, :clear_cache do
+  before 'deploy:migrate', 'deploy:set_rails_env'
+
+  desc 'Restart application'
+  task :restart do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+      within release_path do
+        execute :touch, 'tmp/restart.txt'
+      end
     end
   end
+
+  after :publishing, 'deploy:restart'
+  after :finishing, 'deploy:cleanup'
 
 end
