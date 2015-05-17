@@ -49,7 +49,28 @@ Copy the db/seeds.example.rb and add records for an user, author and posts
 
 ## Tests
 
-* `bundle exec rspec` 
+* `bundle exec rspec`
+
+
+## Vagrant
+
+After provisioning with `vagrant up` use `vagrant ssh` then `cd
+/vagrant` and execute `rbenv rehash` and `bundle install`
+
+Also add ENV vars: `BLOG_API_DB_USR`, `BLOG_API_DB_PWORD`, `SECRET_KEY_BASE` to the
+file /home/vagrant/.profile
+
+Setup the postgres dev db with user/pword:
+
+    sudo su - postgres
+    createuser -P -s -e blog-api
+    createdb blog_api_development
+
+Start the rails app from the shared folder
+
+    vagrant ssh
+    cd /vagrant
+    bundle exec rails s -b 0.0.0.0
 
 
 ## Notes / Reference
