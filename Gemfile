@@ -7,15 +7,10 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-gem 'jsonapi-resources', '0.3.3'#, :git => 'https://github.com/cerebris/jsonapi-resources.git'
+#gem 'jsonapi-resources', '0.3.3'
+gem 'jsonapi-resources', :git => 'https://github.com/cerebris/jsonapi-resources.git'
 
 gem 'pg'
-
-#gem 'nobrainer'
-
-#gem 'sqlite3'
-
-#gem 'sand-dollar', :github => 'realityendshere/sand-dollar', branch: 'master'
 
 gem 'jwt'
 
