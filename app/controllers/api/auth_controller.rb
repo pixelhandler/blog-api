@@ -17,7 +17,7 @@ class Api::AuthController < ApplicationController
       commenter = Commenter.create!(name: params[:username], email: params[:email])
     end
     if commenter
-      render json: { auth_token: commenter.generate_auth_token }
+      render json: { auth_token: commenter.generate_auth_token, commenter_id: commenter.id }
     else
       render json: { error: 'Invalid name or email' }, status: :unauthorized
     end
