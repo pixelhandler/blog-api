@@ -10,6 +10,10 @@ class ApiControllerController < JSONAPI::ResourceController
     render json: { error: 'Auth token is expired' }, status: 419 # unofficial timeout status code
   end
 
+  def current_user
+    @current_user
+  end
+
   private
 
   # Based on the user_id inside the token payload, find the user.

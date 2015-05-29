@@ -1,14 +1,25 @@
 class Api::V1::CommentsController < ApiControllerController
   skip_before_action :set_current_user, :authenticate_request, only: [:index, :show, :show_association, :get_related_resources]
+  before_action :set_current_user
+
+  def current_user
+    @current_user
+  end
 
   private
 
+    def context
+      self
+    end
+
     def set_current_user
       if decoded_auth_token
-        @current_user ||= Commenter.find(decoded_auth_token[:commenter_id])
-        unless @current_user
-          @current_user ||= User.find(decoded_auth_token[:user_id])
+        if decoded_auth_token.has_key? :commenter_id
+          @current_user = Commenter.find(decoded_auth_token[:commenter_id])
+        elsif decoded_auth_token.has_key? :user_id
+          @current_user = User.find(decoded_auth_token[:user_id])
         end
+        nil
       end
     end
 
