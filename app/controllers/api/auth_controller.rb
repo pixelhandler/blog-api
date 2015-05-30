@@ -1,5 +1,4 @@
 class Api::AuthController < ApplicationController
-
   skip_before_action :authenticate_request
 
   def authenticate
@@ -19,7 +18,6 @@ class Api::AuthController < ApplicationController
     end
     if commenter.present?
       @current_user = commenter
-      render json: { auth_token: commenter.generate_auth_token }
       render json: { auth_token: commenter.generate_auth_token, commenter_id: commenter.id }
     else
       render json: { error: 'Invalid name or email' }, status: :unauthorized

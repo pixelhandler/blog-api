@@ -1,5 +1,5 @@
 class Api::V1::CommentersController < ApiControllerController
-  skip_before_action :set_current_user, :authenticate_request, only: [:index, :show, :show_association, :get_related_resource]
+  skip_before_action :authenticate_request, only: [:index, :show, :show_association, :get_related_resource]
 
   private
 

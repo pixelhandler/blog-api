@@ -1,7 +1,7 @@
 require 'jsonapi/resource_controller'
 
 class ApiControllerController < JSONAPI::ResourceController
-  before_action :set_current_user, :authenticate_request
+  before_action :authenticate_request
 
   rescue_from NotAuthenticatedError do
     render json: { error: 'Not Authorized' }, status: :unauthorized
@@ -25,6 +25,7 @@ class ApiControllerController < JSONAPI::ResourceController
 
   # Check to make sure the current user was set and the token is not expired
   def authenticate_request
+    set_current_user
     if auth_token_expired?
       fail AuthenticationTimeoutError
     elsif !@current_user
@@ -45,8 +46,8 @@ class ApiControllerController < JSONAPI::ResourceController
   def http_auth_header_content
     return @http_auth_header_content if defined? @http_auth_header_content
     @http_auth_header_content = begin
-      if request.headers['Authorization'].present?
-        request.headers['Authorization'].split(' ').last
+      if request.headers['HTTP_AUTHORIZATION'].present?
+        request.headers['HTTP_AUTHORIZATION'].split(' ').last
       else
         nil
       end
