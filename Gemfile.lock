@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/cerebris/jsonapi-resources.git
-  revision: e385293a7b5bbf5a483a4bef9bf7f78dc174c49f
+  revision: 7335d833e56c9eece47166b8d0e70e658c87f47f
   specs:
     jsonapi-resources (0.3.3)
       rails (>= 4.0)

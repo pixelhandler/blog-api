@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :author
-  has_many :comments, -> { where(approved: true) }
+  has_many :comments, -> { where(approved: true) }, :dependent => :destroy
 
   validates :slug, uniqueness: true
 
