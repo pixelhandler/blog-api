@@ -12,20 +12,7 @@ class Api::V1::CommentersController < ApiControllerController
       end
     end
 
-    def _serializer
-      JSONAPI::ResourceSerializer.new(resource_klass,
-                                      include: @request.include,
-                                      fields: @request.fields,
-                                      base_url: base_url,
-                                      key_formatter: key_formatter,
-                                      route_formatter: route_formatter)
-    end
-
     def commenter_params
       params.require(:post).permit(:name, :email)
-    end
-
-    def _default_sort
-      [{:field=>"created_at", :direction=>:desc}]
     end
 end

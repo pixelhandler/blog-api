@@ -24,5 +24,10 @@ class Api::V1::PostResource < JSONAPI::Resource
     def count(options = {})
       records(options).count
     end
+
+    # override to allow for using slug as id
+    def verify_key(key, context = nil)
+      key && String(key)
+    end
   end
 end
