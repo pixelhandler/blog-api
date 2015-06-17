@@ -7,7 +7,6 @@ class Commenter < ActiveRecord::Base
 
   validates :name, :length => { :minimum => 4 }
   validates :email, uniqueness: true, email: true
-  validates :email, uniqueness: true, email: true
 
   def generate_auth_token
     payload = { commenter_id: self.id }
