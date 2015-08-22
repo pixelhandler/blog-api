@@ -16,6 +16,10 @@ Rails.application.routes.draw do
       jsonapi_resources :comments, only: [:create, :show, :index, :update, :destroy]
       jsonapi_resources :tags, only: [:create, :show, :index, :update, :destroy]
 
+      jsonapi_resources :pictures, only: [:create, :show, :index, :update, :destroy]
+      jsonapi_resources :employees, only: [:create, :show, :index, :update, :destroy]
+      jsonapi_resources :products, only: [:create, :show, :index, :update, :destroy]
+
       root to: 'api#index'
     end
   end
