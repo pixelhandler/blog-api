@@ -150,11 +150,7 @@ DEPENDENCIES
   capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.1)
   capistrano-rbenv (~> 2.0)
-<<<<<<< f6d42c09cdd20be3b3761294dc1bc1d3339f650f
   jsonapi-resources (= 0.7.0)
-=======
-  jsonapi-resources (= 0.5.7)
->>>>>>> Update gems
   jwt
   pg
   rails (= 4.2.3)

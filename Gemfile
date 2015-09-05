@@ -7,11 +7,7 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-<<<<<<< f6d42c09cdd20be3b3761294dc1bc1d3339f650f
 gem 'jsonapi-resources', '0.7.0'
-=======
-gem 'jsonapi-resources', '0.5.7'
->>>>>>> Update gems
 #gem 'jsonapi-resources', :git => 'https://github.com/cerebris/jsonapi-resources.git'
 
 gem 'pg'
