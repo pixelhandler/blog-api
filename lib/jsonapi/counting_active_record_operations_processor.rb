@@ -11,9 +11,13 @@ class CountingActiveRecordOperationsProcessor < ActiveRecordOperationsProcessor
 
     @operation_meta[:page] = {
       total: count,
-      sort: @operation.sort_criteria,
-      offset: @operation.paginator.offset,
-      limit: @operation.paginator.limit
+      sort: @operation.sort_criteria
     }
+
+    if @operation.paginator.respond_to?(:offset) && @operation.paginator.respond_to?(:limit)
+      @operation_meta[:page][:offset] = @operation.paginator.offset
+      @operation_meta[:page][:limit] = @operation.paginator.limit
+    end
+
   end
 end

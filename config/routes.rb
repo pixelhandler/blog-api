@@ -2,9 +2,6 @@ Rails.application.routes.draw do
   #resources :authors, except: [:new, :edit]
   #resources :posts, except: [:new, :edit]
 
-  #jsonapi_resources :authors
-  #jsonapi_resources :posts
-
   namespace :api, defaults: {format: :json} do
 
     post 'auth' => 'auth#authenticate'
@@ -17,6 +14,7 @@ Rails.application.routes.draw do
       jsonapi_resources :authors, only: [:create, :show, :index, :update, :destroy]
       jsonapi_resources :posts, only: [:create, :show, :index, :update, :destroy]
       jsonapi_resources :comments, only: [:create, :show, :index, :update, :destroy]
+      jsonapi_resources :tags, only: [:create, :show, :index, :update, :destroy]
 
       root to: 'api#index'
     end
