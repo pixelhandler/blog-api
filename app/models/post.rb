@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :tags
 
   validates :slug, uniqueness: true
+  validates :title, presence: true
 
   def to_param
     slug
