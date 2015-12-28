@@ -7,7 +7,7 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-gem 'jsonapi-resources', '0.5.0'
+gem 'jsonapi-resources', '0.7.0'
 #gem 'jsonapi-resources', :git => 'https://github.com/cerebris/jsonapi-resources.git'
 
 gem 'pg'
