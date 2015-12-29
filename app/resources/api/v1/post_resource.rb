@@ -8,7 +8,19 @@ class Api::V1::PostResource < JSONAPI::Resource
 
   paginator :offset
 
+  filter :search
+
   class << self
+    # Support search filter using class method
+    def apply_filter(records, filter, value, _options = {})
+      if records.respond_to? filter.to_sym
+        value = value.join(' ') if filter.to_sym == :search
+        records.send(filter.to_sym, value)
+      else
+        records.where(filter => value)
+      end
+    end
+
     # Find by slug or id
     def find_by_key(slug, options = {})
       context = options[:context]
@@ -31,4 +43,5 @@ class Api::V1::PostResource < JSONAPI::Resource
       key && String(key)
     end
   end
+
 end
