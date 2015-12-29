@@ -9,4 +9,13 @@ class Post < ActiveRecord::Base
   def to_param
     slug
   end
+
+  def self.search(terms)
+    if terms.blank?
+      none
+    else
+      query = sanitize_sql_array(["to_tsquery('pg_catalog.english', ?)", terms.gsub(/\s/,"+")])
+      self.where("tsv @@ #{query}").order("ts_rank_cd(tsv, #{query}) DESC")
+    end
+  end
 end
