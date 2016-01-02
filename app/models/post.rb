@@ -14,7 +14,8 @@ class Post < ActiveRecord::Base
     if terms.blank?
       none
     else
-      query = sanitize_sql_array(["to_tsquery('pg_catalog.english', ?)", terms.gsub(/\s/,"+")])
+      terms = CGI.unescape(terms)
+      query = sanitize_sql_array(["to_tsquery('pg_catalog.english', ?)", terms.gsub(/\s/," & ")])
       self.where("tsv @@ #{query}").order("ts_rank_cd(tsv, #{query}) DESC")
     end
   end
