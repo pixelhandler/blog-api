@@ -1,7 +1,7 @@
 require 'jsonapi/resource'
 
 class Api::V1::ProductResource < JSONAPI::Resource
-  attributes :id, :name
+  attributes :name
 
   has_many :pictures
 end

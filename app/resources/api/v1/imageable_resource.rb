@@ -1,5 +1,5 @@
 class Api::V1::ImageableResource < JSONAPI::Resource
-  attributes :id, :name
+  attributes :name
 
   has_one :imageable, polymorphic: true
 end
