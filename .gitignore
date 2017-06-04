@@ -7,9 +7,8 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
+# Ignore encrypted secrets key file.
+config/secrets.yml.key
 
 # Ignore the config files that are symlinked when deployed
 config/database.yml
@@ -18,24 +17,7 @@ config/secrets.yml
 # Ingore seeds, see db/seeds.example.rb
 db/seeds.rb
 
-# Ignore Vagrant/Chef setup for local dev in Ubuntu using VirtualBox
-/cookbooks
-/.vagrant
-
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
 /tmp
-
-# misc
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.lock
-*.swp
-*.bak
-*.DS_Store

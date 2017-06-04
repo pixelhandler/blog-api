@@ -1,7 +1,7 @@
 require 'jsonapi/resource'
 
 class Api::V1::PostResource < JSONAPI::Resource
-  attributes :id, :title, :slug, :excerpt, :date, :body
+  attributes :title, :slug, :excerpt, :date, :body
   has_one :author
   has_many :comments
   has_many :tags

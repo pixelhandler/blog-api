@@ -1,6 +1,7 @@
 require 'digest'
+require 'auth_token'
 
-class Commenter < ActiveRecord::Base
+class Commenter < ApplicationRecord
   before_save :create_hash
 
   has_many :comments

@@ -1,4 +1,4 @@
-class Author < ActiveRecord::Base
+class Author < ApplicationRecord
   has_many :posts
 
   validates :name, :length => { :minimum => 4 }

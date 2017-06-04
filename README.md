@@ -2,42 +2,33 @@
 
 JSON API following [jsonapi.org] spec for a blog application with auth for creating and editing post resources
 
-* .ruby-version is setup for 2.2.2
-* Project created with [rails-api] gem (so no view layer, JSON is the view)
+* .ruby-version is setup for 2.4.1
 * Serialization of models (to JSON) is done with the [jsonapi-resources] gem
-  * Using ActiveRecord is the happy path for now, I used the pg gem, for [PostgreSQL]
-
+  * Use ActiveRecord and the `pg` gem for [PostgreSQL]
 
 ## Setup
 
-* `bundle` install the gems
-
-* Database creation, I used the [Postgres app] and had to configure bundle:
-
-    bundle config build.pg --with-pg-config=/Applications/Postgres.app/Contents/Versions/9.4/bin/pg_config
+* `bundle` to install the gems
 
 ### Config
 
 Copy the config/database.example.yml config/secrets.example.yml files to:
-config/database.yml config/secrets.yml 
+config/database.yml config/secrets.yml
 
 In the database.example.yml file the password is set to and environemnt variables:
 BLOG_API_DB_USR and BLOG_API_DB_PWORD. set your environment variables, or replace them
 with your db credentials
 
-    export BLOG_API_DB_USR='blog-api'
+    export BLOG_API_DB_USR='blog_api'
     export BLOG_API_DB_PWORD='XXXX'
 
-* DB role 'blog-api'
+* DB role 'blog_api'
 
-Setup a Postgress role: 'blog-api'
+Setup a Postgress role: 'blog_api'
 
-* http://postgresapp.com
-* https://eggerapps.at/pgcommander/
-
-    CREATE ROLE api WITH SUPERUSER LOGIN PASSWORD 'XXXX';
-    CREATE DATABASE blog_api_development OWNER blog-api;
-    CREATE DATABASE blog_api_test OWNER blog-api;
+    CREATE ROLE blog_api WITH SUPERUSER LOGIN PASSWORD 'X';
+    CREATE DATABASE blog_api_development OWNER blog_api;
+    CREATE DATABASE blog_api_test OWNER blog_api;
 
 * `bundle exec rake db:setup`
 * See the seeds file to create resources for a post, author, and user
@@ -46,32 +37,36 @@ Setup a Postgress role: 'blog-api'
 
 Copy the db/seeds.example.rb and add records for an user, author and posts
 
+## Restore DB from production
 
-## Tests
+1) Use tunnel
 
-* `bundle exec rspec`
+    ssh -fNg -L 54321:127.0.0.1:5432 pixelhandler.com
+    lsof -i tcp | grep ^ssh
 
+2) Dump database (use pword from prod)
 
-## Vagrant
+    current_time=$(date "+%Y.%m.%d-%H.%M.%S"); pg_dump -U $BLOG_API_DB_PROD_USR -h localhost -p 54321 $BLOG_API_DB_PROD > $BLOG_API_DB_PROD"."$current_time".sql"
 
-After provisioning with `vagrant up` use `vagrant ssh` then `cd
-/vagrant` and execute `rbenv rehash` and `bundle install`
+3) Drop and create
 
-Also add ENV vars: `BLOG_API_DB_USR`, `BLOG_API_DB_PWORD`, `SECRET_KEY_BASE` to the
-file /home/vagrant/.profile
+    bundle exec rake db:drop
+    bundle exec rake db:create
 
-Setup the postgres dev db with user/pword:
+4) Import
 
-    sudo su - postgres
-    createuser -P -s -e blog-api
-    createdb blog_api_development
+    PGUSER=$BLOG_API_DB_USR PGPASSWORD=$BLOG_API_DB_PWORD psql -h localhost -p $BLOG_API_DB_PORT blog_api_development < blog_api_production.sql
 
-Start the rails app from the shared folder
+## Docker For PostgreSQL
 
-    vagrant ssh
-    cd /vagrant
-    bundle exec rails s -b 0.0.0.0
+- https://docs.docker.com/engine/examples/postgresql_service/#installing-postgresql-on-docker
 
+    docker build -t eg_postgresql .
+    docker run --rm -P --name pg_test eg_postgresql
+    docker ps
+    psql -h localhost -p 32770 -d docker -U docker --password
+
+`docker` is the pword.
 
 ## Notes / Reference
 
@@ -81,7 +76,5 @@ Start the rails app from the shared folder
   * <http://robert-reiz.com/2014/04/12/has_secure_password-with-rails-4-1/>
 
 [jsonapi.org]: http://jsonapi.org
-[rails-api]: https://github.com/rails-api/rails-api
 [PostgreSQL]: http://www.postgresql.org
-[Postgres app]: http://postgresapp.com
 [jsonapi-resources]: https://github.com/cerebris/jsonapi-resources

@@ -1,5 +1,4 @@
 class Api::AuthController < ApplicationController
-  skip_before_action :authenticate_request
 
   def authenticate
     user = User.find_by_credentials(params[:username], params[:password])
