@@ -6,6 +6,10 @@ class Api::V1::CommentResource < JSONAPI::Resource
   has_one :commenter
   has_one :post
 
+  before_save do
+    @model.tenant = context[:tenant]
+  end
+
   def approved
     if user_is_authorized or comment_owned_by_commenter?(@model)
       return @model.approved
@@ -14,6 +18,10 @@ class Api::V1::CommentResource < JSONAPI::Resource
 
   def fetchable_fields
     user_is_known ? super : super - [:approved]
+  end
+
+  def self.records(options = {})
+    Comment.where(tenant: options[:context][:tenant])
   end
 
   private

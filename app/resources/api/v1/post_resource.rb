@@ -11,7 +11,15 @@ class Api::V1::PostResource < JSONAPI::Resource
   filter :search
   filter :status, default: 'published'
 
+  before_save do
+    @model.tenant = context[:tenant]
+  end
+
   class << self
+    def records(options = {})
+      Post.where(tenant: options[:context][:tenant])
+    end
+
     # Support search filter using class method
     def apply_filter(records, filter, value, _options = {})
       if records.respond_to? filter.to_sym
@@ -27,7 +35,7 @@ class Api::V1::PostResource < JSONAPI::Resource
       context = options[:context]
       model = records(options).where(slug: slug).first
       if model.nil?
-        model = records(options).where({_primary_key => slug}).first
+        model = records(options).where({ _primary_key => slug }).first
       end
       if model.nil?
         raise JSONAPI::Exceptions::RecordNotFound.new(slug)

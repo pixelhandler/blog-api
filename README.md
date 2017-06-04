@@ -50,8 +50,8 @@ Copy the db/seeds.example.rb and add records for an user, author and posts
 
 3) Drop and create
 
-    bundle exec rake db:drop
-    bundle exec rake db:create
+    bin/rails db:drop
+    bin/rails db:create
 
 4) Import
 
@@ -64,7 +64,7 @@ Copy the db/seeds.example.rb and add records for an user, author and posts
     docker build -t eg_postgresql .
     docker run --rm -P --name pg_test eg_postgresql
     docker ps
-    psql -h localhost -p 32770 -d docker -U docker --password
+    psql -h localhost -p 32771 -d docker -U docker --password
 
 `docker` is the pword.
 
