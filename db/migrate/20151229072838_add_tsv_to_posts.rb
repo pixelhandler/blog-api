@@ -1,4 +1,4 @@
-class AddTsvToPosts < ActiveRecord::Migration
+class AddTsvToPosts < ActiveRecord::Migration[5.1]
   def up
     execute <<-DOC
       ALTER TABLE posts ADD COLUMN tsv tsvector;

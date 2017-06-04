@@ -1,4 +1,6 @@
-class User < ActiveRecord::Base
+require 'auth_token'
+
+class User < ApplicationRecord
   belongs_to :author
 
   has_secure_password

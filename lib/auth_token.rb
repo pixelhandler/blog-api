@@ -1,3 +1,5 @@
+require 'decoded_auth_token'
+
 class AuthToken
   def self.encode(payload, exp=24.hours.from_now)
     payload[:exp] = exp.to_i

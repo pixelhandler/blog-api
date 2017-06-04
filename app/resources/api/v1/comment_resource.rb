@@ -1,7 +1,7 @@
 require 'jsonapi/resource'
 
 class Api::V1::CommentResource < JSONAPI::Resource
-  attributes :id, :body, :created_at
+  attributes :body, :created_at
   attribute :approved
   has_one :commenter
   has_one :post

@@ -1,4 +1,5 @@
 require 'jsonapi/resource_controller'
+require 'not_authenticated_error'
 
 class ApiControllerController < JSONAPI::ResourceController
   before_action :authenticate_request
