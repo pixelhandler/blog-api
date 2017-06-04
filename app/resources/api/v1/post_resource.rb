@@ -13,6 +13,7 @@ class Api::V1::PostResource < JSONAPI::Resource
 
   before_save do
     @model.tenant = context[:tenant]
+    @model.date = Date.current if @model.date.nil?
   end
 
   class << self
