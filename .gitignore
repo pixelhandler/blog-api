@@ -14,8 +14,11 @@ config/secrets.yml.key
 config/database.yml
 config/secrets.yml
 
-# Ingore seeds, see db/seeds.example.rb
+# Ignore seeds, see db/seeds.example.rb
 db/seeds.rb
+
+# Ignore env vars
+.rbenv-vars
 
 # Ignore all logfiles and tempfiles.
 /log/*

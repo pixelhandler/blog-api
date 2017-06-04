@@ -26,9 +26,17 @@ with your db credentials
 
 Setup a Postgress role: 'blog_api'
 
+    createuser -P -s -e blog_api
+    createdb blog_api_development -O blog_api
+
+Or,
+
+    PGUSER=$BLOG_API_DB_USR PGPASSWORD=$BLOG_API_DB_PWORD psql -h localhost -p 5432 blog_api_development
+
     CREATE ROLE blog_api WITH SUPERUSER LOGIN PASSWORD 'X';
     CREATE DATABASE blog_api_development OWNER blog_api;
     CREATE DATABASE blog_api_test OWNER blog_api;
+
 
 * `bundle exec rake db:setup`
 * See the seeds file to create resources for a post, author, and user
@@ -64,7 +72,7 @@ Copy the db/seeds.example.rb and add records for an user, author and posts
     docker build -t eg_postgresql .
     docker run --rm -P --name pg_test eg_postgresql
     docker ps
-    psql -h localhost -p 32771 -d docker -U docker --password
+    psql -h localhost -p 32768 -d docker -U docker --password
 
 `docker` is the pword.
 
