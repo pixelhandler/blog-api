@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229072838) do
+ActiveRecord::Schema.define(version: 20170604055550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "authors", force: :cascade do |t|
+  create_table "authors", id: :serial, force: :cascade do |t|
     t.string "email"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "commenters", force: :cascade do |t|
+  create_table "commenters", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
@@ -31,18 +31,18 @@ ActiveRecord::Schema.define(version: 20151229072838) do
     t.index ["email"], name: "index_commenters_on_email", unique: true
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", id: :serial, force: :cascade do |t|
     t.string "body"
     t.boolean "approved", default: false
-    t.bigint "commenter_id"
-    t.bigint "post_id"
+    t.integer "commenter_id"
+    t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", id: :serial, force: :cascade do |t|
     t.string "body"
     t.string "excerpt"
     t.string "slug"
@@ -50,33 +50,33 @@ ActiveRecord::Schema.define(version: 20151229072838) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "author_id"
+    t.integer "author_id"
     t.tsvector "tsv"
+    t.string "status", default: "pending"
     t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["tsv"], name: "posts_tsv_idx", using: :gin
   end
 
   create_table "posts_tags", id: false, force: :cascade do |t|
-    t.bigint "post_id", null: false
-    t.bigint "tag_id", null: false
+    t.integer "post_id", null: false
+    t.integer "tag_id", null: false
     t.index ["post_id", "tag_id"], name: "index_posts_tags_on_post_id_and_tag_id", unique: true
     t.index ["tag_id", "post_id"], name: "index_posts_tags_on_tag_id_and_post_id", unique: true
   end
 
-  create_table "tags", force: :cascade do |t|
+  create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.bigint "author_id"
+    t.integer "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_users_on_author_id"
   end
 
   add_foreign_key "comments", "commenters"

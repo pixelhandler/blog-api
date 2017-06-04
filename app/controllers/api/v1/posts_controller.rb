@@ -3,6 +3,6 @@ class Api::V1::PostsController < ApiControllerController
 
   private
     def post_params
-      params.require(:post).permit(:body, :excerpt, :slug, :title, :date)
+      params.require(:post).permit(:body, :excerpt, :slug, :title, :date, :status)
     end
 end

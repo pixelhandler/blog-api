@@ -1,7 +1,7 @@
 require 'jsonapi/resource'
 
 class Api::V1::PostResource < JSONAPI::Resource
-  attributes :title, :slug, :excerpt, :date, :body
+  attributes :title, :slug, :status, :excerpt, :date, :body
   has_one :author
   has_many :comments
   has_many :tags
@@ -9,6 +9,7 @@ class Api::V1::PostResource < JSONAPI::Resource
   paginator :offset
 
   filter :search
+  filter :status, default: 'published'
 
   class << self
     # Support search filter using class method

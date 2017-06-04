@@ -5,6 +5,8 @@ class Post < ApplicationRecord
 
   validates :slug, uniqueness: true
   validates :title, presence: true
+  validates :status, inclusion: { in: %w(pending published retired),
+    message: "%{value} is not a valid status" }
 
   def to_param
     slug
