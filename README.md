@@ -2,7 +2,7 @@
 
 JSON API following [jsonapi.org] spec for a blog application with auth for creating and editing post resources
 
-* .ruby-version is setup for 2.4.1
+* .ruby-version is setup for 2.4.2
 * Serialization of models (to JSON) is done with the [jsonapi-resources] gem
   * Use ActiveRecord and the `pg` gem for [PostgreSQL]
 

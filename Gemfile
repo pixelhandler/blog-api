@@ -7,10 +7,10 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.1'
+gem 'rails', '~> 5.2.0'
 
-# http://jsonapi-resources.com/v0.8/guide/
-gem 'jsonapi-resources', '0.8.0'
+# http://jsonapi-resources.com/v0.9/guide/
+gem 'jsonapi-resources', '0.9.0'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
