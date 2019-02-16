@@ -9,6 +9,8 @@
 
 # Ignore encrypted secrets key file.
 config/secrets.yml.key
+config/master.key
+config/credentials.yml.enc
 
 # Ignore the config files that are symlinked when deployed
 config/database.yml
