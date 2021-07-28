@@ -7,13 +7,13 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 6.1.4'
 
 # http://jsonapi-resources.com/v0.9/guide/
-gem 'jsonapi-resources', '0.9.0'
+gem 'jsonapi-resources', '0.9.12'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.0.0'
+gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
