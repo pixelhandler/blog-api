@@ -146,7 +146,6 @@ namespace :deploy do
 
   before :starting,     :check_revision
   before :starting,     :check_write_permissions
-  after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :publishing,   :restart
 end
