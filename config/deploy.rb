@@ -35,7 +35,7 @@ append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/secre
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-append :linked_dirs, 'bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system'
+append :linked_dirs, 'bin', 'log', 'pids', 'tmp/cache', 'sockets', 'vendor/bundle', 'public/system'
 
 # If using Digital Ocean's Ruby on Rails Marketplace framework, your username is 'rails'
 set :user,            'deploy'
@@ -44,10 +44,10 @@ set :puma_workers,    0
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-# set :default_env, {
-#   path: "/home/deploy/.rbenv/plugins/ruby-build/bin:/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH",
-#   rbenv_root: "/usr/bin/rbenv"
-# }
+set :default_env, {
+  path: "/home/deploy/.rbenv/plugins/ruby-build/bin:/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH",
+  rbenv_root: "/home/deploy/.rbenv"
+}
 
 set :rbenv_type, :user # or :system, or :fullstaq (for Fullstaq Ruby), depends on your rbenv setup
 # set :rbenv_ruby, '3.0.1'
