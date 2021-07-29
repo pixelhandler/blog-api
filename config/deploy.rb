@@ -37,21 +37,35 @@ append :linked_files, 'config/database.yml', 'config/secrets.yml', 'config/secre
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 append :linked_dirs, 'bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system'
 
+# If using Digital Ocean's Ruby on Rails Marketplace framework, your username is 'rails'
+set :user,            'deploy'
+set :puma_threads,    [1, 6]
+set :puma_workers,    0
+
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+# set :default_env, {
+#   path: "/home/deploy/.rbenv/plugins/ruby-build/bin:/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH",
+#   rbenv_root: "/usr/bin/rbenv"
+# }
 
-def env_vars
-  ". /etc/default/nginx"
-end
+set :rbenv_type, :user # or :system, or :fullstaq (for Fullstaq Ruby), depends on your rbenv setup
+# set :rbenv_ruby, '3.0.1'
 
-set :rbenv_type, :user # or :system, depends on your rbenv setup
-# set :rbenv_ruby, '2.2.2'
 # in case you want to set ruby version from the file:
 set :rbenv_ruby, File.read('.ruby-version').strip
 
-set :rbenv_prefix, "#{env_vars} && RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+# def env_vars
+#   ". /etc/default/nginx"
+# end
+
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+# set :rbenv_prefix, "#{env_vars} && RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+
 set :rbenv_roles, :all # default value
+# set :rbenv_ruby_dir, "/home/deploy/.rbenv/versions/#{fetch(:rbenv_ruby)}" # :~/.rbenv/versions/3.0.1
+# set :rbenv_custom_path, '/usr'
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
@@ -62,16 +76,11 @@ set :rbenv_roles, :all # default value
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-# If using Digital Ocean's Ruby on Rails Marketplace framework, your username is 'rails'
-set :user,            'deploy'
-set :puma_threads,    [1, 6]
-set :puma_workers,    0
-
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/home/#{fetch(:user)}/www/#{fetch(:application)}"
+set :deploy_to,       "/home/deploy/www/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
