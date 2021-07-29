@@ -41,7 +41,7 @@ install_plugin Capistrano::Puma
 # For a Digital Ocean deploy, 'Daemon' will work
 # Documentation: https://github.com/seuros/capistrano-puma
 # From the documentation: "If you using puma daemonized (not supported in Puma 5+)""
-# install_plugin Capistrano::Puma::Daemon
+install_plugin Capistrano::Puma::Daemon
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
