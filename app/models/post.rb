@@ -18,7 +18,7 @@ class Post < ApplicationRecord
     else
       terms = CGI.unescape(terms)
       query = sanitize_sql_array(["to_tsquery('pg_catalog.english', ?)", terms.gsub(/\s/," & ")])
-      self.where("tsv @@ #{query}").order("ts_rank_cd(tsv, #{query}) DESC")
+      self.where("tsv @@ #{query}").order(Arel.sql("ts_rank_cd(tsv, #{query}) DESC"))
     end
   end
 end
