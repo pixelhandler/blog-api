@@ -2,6 +2,7 @@ require 'jsonapi/resource_controller'
 require 'not_authenticated_error'
 
 class ApiControllerController < JSONAPI::ResourceController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_request
 
   rescue_from NotAuthenticatedError do
