@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.4'
+gem 'rails', '~> 6.1.7.4'
 
 # http://jsonapi-resources.com/v0.9/guide/
 gem 'jsonapi-resources', '0.9.12'
